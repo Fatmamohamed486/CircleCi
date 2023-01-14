@@ -17,7 +17,7 @@ jobs:
       - run:
           name: "Say hello"
           command:
-            echo Hello
+            #echo Hello
             echo $MY-ENV-VAR
   say-world:
     docker:
@@ -26,8 +26,8 @@ jobs:
       - checkout
       - run:
           command:  
-            echo world!
-            echo $MY-ENV-VAR2
+            #echo world!
+            echo $MY-ENV-VAR
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
