@@ -31,7 +31,7 @@ jobs:
             echo Hello
             return 1
       - run: 
-          name: "on-fail"
+          name: "Hello-Error"
           command: echo "ERROR"
           when: on_fail
   say-world:
@@ -44,6 +44,10 @@ jobs:
           command: |  
             echo world!
             echo $MY-ENV-VAR
+      - run:
+          name: "World-Error"
+          command: echo "Error"
+          when: on_fail
   save-hello-world-output:
     docker:
       - image: circleci/node:13.8.0
