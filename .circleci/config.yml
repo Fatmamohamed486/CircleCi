@@ -30,6 +30,10 @@ jobs:
           command: |
             echo Hello
             return 1
+      - run: 
+          name: "on-fail"
+          command: echo "ERROR"
+          when: on_fail
   say-world:
     docker:
       - image: circleci/node:13.8.0
@@ -39,7 +43,7 @@ jobs:
           name: "Say world"
           command: |  
             echo world!
-          when: on_fail
+            echo $MY-ENV-VAR
   save-hello-world-output:
     docker:
       - image: circleci/node:13.8.0
@@ -68,9 +72,9 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-      - say-world
-          #requires: 
-          #  - say-hello
+      - say-world:
+          requires: 
+            - say-hello
       - save-hello-world-output
       - print-output:
           requires:
