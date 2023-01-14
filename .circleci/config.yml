@@ -16,8 +16,8 @@ jobs:
       - checkout
       - run:
           name: "Say hello"
-          command:
-            #echo Hello
+          command: |
+            echo Hello
             echo $MY-ENV-VAR
   say-world:
     docker:
@@ -25,10 +25,28 @@ jobs:
     steps:
       - checkout
       - run:
-          command:  
-            #echo world!
+          name: "Say world"
+          command: |  
+            echo world!
             echo $MY-ENV-VAR
+  save-hello-world-output:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - run:
+          name: "hello world"
+          command: echo "hello world" > output.txt
+  print-output:
+      docker:
+      - image: circleci/node:13.8.0
+      steps:
+        - checkout
+        - run:
+            name: "print output"
+            command: cat output.txt 
 
+        
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -38,3 +56,9 @@ workflows:
       - say-world:
           requires: 
             - say-hello
+      - save-hello-world-output
+      - print-output:
+          requires:
+            - save-hello-world-output
+
+  
