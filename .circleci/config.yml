@@ -16,14 +16,14 @@ jobs:
       - checkout
       - run:
           name: "Say hello"
-          command: "echo Hello"
+          command: echo Hello
   say-world:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
-          command:  "echo world!"
+          command:  echo world!
 
 
 # Invoke jobs via workflows
