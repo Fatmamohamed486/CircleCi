@@ -29,7 +29,7 @@ jobs:
           name: "Say hello"
           command: |
             echo Hello
-            return 1
+          #  return 1
       - run: 
           name: "Hello-Error"
           command: echo "ERROR"
